@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login, Registration, Forgot password page</title>
+  <link rel="stylesheet" href="./assets/style/style.css" />
+  <link rel="stylesheet" href="./assets/fontawesome/css/solid.min.css" />
+  <link rel="stylesheet" href="./assets/fontawesome/css/fontawesome.min.css" />
+  <script src="./assets/script/script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h2 class="logo">Logo</h2>
+    <nav class="navigation">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+    <button class="login-button-popup">Login</button>
+  </header>
+
+  <div class="wrapper">
+    <button class="icon-close"><i class="fa-solid fa-xmark"></i></button>
+
+    <div class="form-box login">
+      <h2>Login</h2>
+      <form action="#">
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+          <input type="email" name="email" required />
+          <label for="email">Email</label>
+          <!-- <p class="error-login error-fake-email">This is not a real email</p>
+          <p class="error-login error-not-account">
+            Account with this email doesn't exist
+          </p> -->
+        </div>
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <input type="password" name="password" required />
+          <label for="password">Password</label>
+          <!-- <p class="error-login error-wrong-data">
+            Email and password doesn't match
+          </p> -->
+        </div>
+        <div class="remember-me">
+          <label><input type="checkbox" /> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button type="submit" class="login-button">Login</button>
+        <div class="login-registration">
+          <p>
+            Don't have an account? <a href="#" class="registration-link">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
