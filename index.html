@@ -24,34 +24,37 @@
     <button class="login-button-popup">Login</button>
   </header>
 
-  <div class="wrapper">
+  <div class="wrapper wrapper-login">
     <button class="icon-close"><i class="fa-solid fa-xmark"></i></button>
 
-    <div class="form-box login">
+    <div class="form-box login active">
       <h2>Login</h2>
       <form action="#">
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-envelope"></i></span>
           <input type="email" name="email" required />
           <label for="email">Email</label>
-          <!-- <p class="error-login error-fake-email">This is not a real email</p>
-          <p class="error-login error-not-account">
+          <!-- <p class="error-login error-not-account">
             Account with this email doesn't exist
           </p> -->
         </div>
+        <p class="form-error form-error-email">
+          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">This is not a real email</span>
+        </p>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-lock"></i></span>
           <input type="password" name="password" required />
           <label for="password">Password</label>
-          <!-- <p class="error-login error-wrong-data">
-            Email and password doesn't match
-          </p> -->
         </div>
-        <div class="remember-me">
+        <p class="form-error form-error-password">
+          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">Email and password doesn't
+            match</span>
+        </p>
+        <div class="form-checkfield remember-me">
           <label><input type="checkbox" /> Remember me</label>
           <a href="#">Forgot Password?</a>
         </div>
-        <button type="submit" class="login-button">Login</button>
+        <button type="submit" class="form-submit-button login-button">Login</button>
         <div class="login-registration">
           <p>
             Don't have an account? <a href="#" class="registration-link">Register</a>
@@ -59,6 +62,76 @@
         </div>
       </form>
     </div>
+
+    <div class="form-box registration hidden-right">
+      <h2>Registration</h2>
+      <form action="#">
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+          <input type="email" name="email" required />
+          <label for="email">Email</label>
+        </div>
+        <p class="form-error form-error-email">
+          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">This is not a real email</span>
+        </p>
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <input type="password" name="password" required />
+          <label for="password">Password</label>
+        </div>
+        <p class="form-error form-error-password">
+          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">Password musst include:</span>
+        </p>
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <input type="password" name="repeat-password" required />
+          <label for="repeat-password">Repeat password</label>
+        </div>
+        <p class="form-error form-error-password">
+          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">Passwords doesn't
+            match</span>
+        </p>
+        <div class="form-checkfield terms-agreetment">
+          <label><input type="checkbox" /> I agree to the terms and conditions</label>
+        </div>
+        <button type="submit" class="form-submit-button register-button">Register</button>
+        <div class="login-registration">
+          <p>
+            Already have an account? <a href="#" class="login-link">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="form-box reset hidden-left">
+      <h2>Reset password</h2>
+      <form action="#">
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+          <input type="email" name="email" required />
+          <label for="email">Email</label>
+          <!-- <p class="error-login error-not-account">
+            Account with this email doesn't exist
+          </p> -->
+        </div>
+        <p class="form-error form-error-email">
+          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">There is no account with this email</span>
+        </p>
+        <p><i class="fa-solid fa-circle-info"></i> We will send you reset link via email</p>
+        <div class="login-registration">
+          <p>
+            <a href="#" class="registration-link">Login</a> if you remembered the password
+          </p>
+        </div>
+        <button type="submit" class="form-submit-button login-button">Reset password</button>
+        <div class="login-registration">
+          <p>
+            Don't have an account? <a href="#" class="registration-link">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
   </div>
 </body>
 
