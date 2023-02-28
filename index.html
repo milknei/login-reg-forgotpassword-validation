@@ -21,11 +21,11 @@
       <a href="#">Services</a>
       <a href="#">Contact</a>
     </nav>
-    <button class="login-button-popup">Login</button>
+    <button class="login-popup-button">Login</button>
   </header>
 
-  <div class="wrapper wrapper-login">
-    <button class="icon-close"><i class="fa-solid fa-xmark"></i></button>
+  <div class="form-wrapper">
+    <button class="form-close-button"><i class="fa-solid fa-xmark"></i></button>
 
     <div class="form-box login active">
       <h2>Login</h2>
@@ -52,12 +52,12 @@
         </p>
         <div class="form-checkfield remember-me">
           <label><input type="checkbox" /> Remember me</label>
-          <a href="#">Forgot Password?</a>
+          <a class="reset-password-link change-form-link" href="#" data-linkto="password-reset">Forgot Password?</a>
         </div>
         <button type="submit" class="form-submit-button login-button">Login</button>
         <div class="login-registration">
           <p>
-            Don't have an account? <a href="#" class="registration-link">Register</a>
+            Don't have an account? <a href="#" class="registration-link change-form-link" data-linkto="registration">Register</a>
           </p>
         </div>
       </form>
@@ -97,13 +97,13 @@
         <button type="submit" class="form-submit-button register-button">Register</button>
         <div class="login-registration">
           <p>
-            Already have an account? <a href="#" class="login-link">Login</a>
+            Already have an account? <a href="#" class="login-link change-form-link" data-linkto="login">Login</a>
           </p>
         </div>
       </form>
     </div>
 
-    <div class="form-box reset hidden-left">
+    <div class="form-box password-reset hidden-left">
       <h2>Reset password</h2>
       <form action="#">
         <div class="input-box">
@@ -119,14 +119,14 @@
         </p>
         <p><i class="fa-solid fa-circle-info"></i> We will send you reset link via email</p>
         <div class="login-registration">
-          <p>
-            <a href="#" class="registration-link">Login</a> if you remembered the password
+          <p class="login-line">
+            <a href="#" class="registration-link change-form-link" data-linkto="login">Login</a> if you remembered the password
           </p>
         </div>
-        <button type="submit" class="form-submit-button login-button">Reset password</button>
+        <button type="submit" class="form-submit-button reset-password-button">Reset password</button>
         <div class="login-registration">
           <p>
-            Don't have an account? <a href="#" class="registration-link">Register</a>
+            Don't have an account? <a href="#" class="registration-link change-form-link" data-linkto="registration">Register</a>
           </p>
         </div>
       </form>
