@@ -21,7 +21,11 @@
       <a href="#">Services</a>
       <a href="#">Contact</a>
     </nav>
-    <button class="login-popup-button">Login</button>
+    <nav class="navigation logged-in">
+      <a href="#" class="profile-link">My Profile</a>
+      <button class="header-button log-out-button">Log out</button>
+    </nav>
+    <button class="header-button login-popup-button active">Login</button>
   </header>
 
   <div class="form-wrapper">
@@ -29,10 +33,10 @@
 
     <div class="form-box login active">
       <h2>Login</h2>
-      <form action="#">
+      <form action="#" name="loginForm" novalidate>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-envelope"></i></span>
-          <input type="email" name="email" required />
+          <input type="email" name="email" autocomplete="email" required />
           <label for="email">Email</label>
           <!-- <p class="error-login error-not-account">
             Account with this email doesn't exist
@@ -43,15 +47,15 @@
         </p>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-lock"></i></span>
-          <input type="password" name="password" required />
+          <input type="password" name="password" autocomplete="current-password" required />
           <label for="password">Password</label>
         </div>
-        <p class="form-error form-error-password">
+        <p class="form-error form-error-general">
           <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">Email and password doesn't
             match</span>
         </p>
         <div class="form-checkfield remember-me">
-          <label><input type="checkbox" /> Remember me</label>
+          <label><input type="checkbox" name="loginRememberMe" /> Remember me</label>
           <a class="reset-password-link change-form-link" href="#" data-linkto="password-reset">Forgot Password?</a>
         </div>
         <button type="submit" class="form-submit-button login-button">Login</button>
@@ -65,10 +69,10 @@
 
     <div class="form-box registration hidden-right">
       <h2>Registration</h2>
-      <form action="#">
+      <form action="#" name="registrationForm" novalidate>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-envelope"></i></span>
-          <input type="email" name="email" required />
+          <input type="email" name="email" autocomplete="email" required />
           <label for="email">Email</label>
         </div>
         <p class="form-error form-error-email">
@@ -76,7 +80,7 @@
         </p>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-lock"></i></span>
-          <input type="password" name="password" required />
+          <input type="password" name="password" autocomplete="new-password" required />
           <label for="password">Password</label>
         </div>
         <p class="form-error form-error-password">
@@ -84,7 +88,7 @@
         </p>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-lock"></i></span>
-          <input type="password" name="repeat-password" required />
+          <input type="password" name="repeat-password" autocomplete="" required />
           <label for="repeat-password">Repeat password</label>
         </div>
         <p class="form-error form-error-password">
@@ -105,7 +109,7 @@
 
     <div class="form-box password-reset hidden-left">
       <h2>Reset password</h2>
-      <form action="#">
+      <form action="#" name="resetPasswordForm" novalidate>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-envelope"></i></span>
           <input type="email" name="email" required />

@@ -43,7 +43,7 @@ header {
     user-select: none;
   }
   
-  .navigation a {
+  header a {
     position: relative;
     font-style: 1.3rem;
     color: #ffffff;
@@ -72,10 +72,18 @@ header {
     transform-origin: left;
     transform: scaleX(1);
   }
+
+  .navigation.logged-in {
+    display: none;
+  }
+
+  .navigation.logged-in.active {
+    display: block;
+  }
   
-  .login-popup-button {
+  .header-button {
     width: 7.5rem;
-    height: 2.8rem;
+    height: 2.6rem;
     background: transparent;
     border: 0.1rem solid #ffffff;
     box-shadow: 0rem 0rem 0.2rem #ffffff;
@@ -88,9 +96,21 @@ header {
     transition: 0.5s;
   }
   
-  .login-popup-button:hover {
+  .header-button:hover {
     background: #ffffff;
     color: #0f091d;
+  }
+
+  .login-popup-button {
+    display: none;
+  }
+  
+  .login-popup-button.active {
+    display: block;
+  }
+
+  .log-out-button {
+    margin-left: .5rem  ;
   }
   
   .form-wrapper {
@@ -174,7 +194,7 @@ header {
   }
   
   .input-box input:focus ~ label,
-  .input-box input:valid ~ label {
+  .input-box input.not-empty ~ label {
     top: -0.3rem;
     font-size: 0.8rem;
   }
@@ -230,6 +250,7 @@ header {
   
   .form-checkfield label {
     margin-left: 1.2rem;
+    cursor: pointer;
   }
   
   .form-checkfield label input {
@@ -274,6 +295,11 @@ header {
     color: #000000;
   }
   
+  .form-submit-button:disabled {
+    background: rgba(255, 255, 255, 0.7);
+    cursor:not-allowed;
+  }
+  
   .form-box p {
     text-align: center;
     font-size: 0.9rem;
@@ -297,6 +323,10 @@ header {
     padding: .5rem 1.1rem;
     cursor: pointer;
     z-index: 100;
+  }
+
+  .form-close-button:hover {
+    color: rgba(255, 255, 255, 0.7);
   }
   
   .form-box .form-error {
