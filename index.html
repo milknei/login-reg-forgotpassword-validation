@@ -61,7 +61,8 @@
         <button type="submit" class="form-submit-button login-button">Login</button>
         <div class="login-registration">
           <p>
-            Don't have an account? <a href="#" class="registration-link change-form-link" data-linkto="registration">Register</a>
+            Don't have an account? <a href="#" class="registration-link change-form-link"
+              data-linkto="registration">Register</a>
           </p>
         </div>
       </form>
@@ -83,22 +84,23 @@
           <input type="password" name="password" autocomplete="new-password" required />
           <label for="password">Password</label>
         </div>
-        <p class="form-error form-error-password">
-          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">Password musst include:</span>
+        <p class="form-error form-error-password active two-lines">
+          <i class="fa-solid fa-circle-info"></i><span class="form-error-message">Must be 8+ digits and include:<br />Capital letter,
+            a Number, a Special character</span>
         </p>
         <div class="input-box">
           <span class="icon"><i class="fa-solid fa-lock"></i></span>
-          <input type="password" name="repeat-password" autocomplete="" required />
+          <input type="password" name="repeatPassword" autocomplete="" required />
           <label for="repeat-password">Repeat password</label>
         </div>
-        <p class="form-error form-error-password">
+        <p class="form-error form-error-general">
           <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">Passwords doesn't
             match</span>
         </p>
         <div class="form-checkfield terms-agreetment">
-          <label><input type="checkbox" /> I agree to the terms and conditions</label>
+          <label><input type="checkbox" name="registrationTerms" /> I agree to the terms and conditions</label>
         </div>
-        <button type="submit" class="form-submit-button register-button">Register</button>
+        <button type="submit" name="submitButton" class="form-submit-button register-button">Register</button>
         <div class="login-registration">
           <p>
             Already have an account? <a href="#" class="login-link change-form-link" data-linkto="login">Login</a>
@@ -119,18 +121,21 @@
           </p> -->
         </div>
         <p class="form-error form-error-email">
-          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">There is no account with this email</span>
+          <i class="fa-solid fa-circle-exclamation"></i><span class="form-error-message">There is no account with this
+            email</span>
         </p>
         <p><i class="fa-solid fa-circle-info"></i> We will send you reset link via email</p>
         <div class="login-registration">
           <p class="login-line">
-            <a href="#" class="registration-link change-form-link" data-linkto="login">Login</a> if you remembered the password
+            <a href="#" class="registration-link change-form-link" data-linkto="login">Login</a> if you remembered the
+            password
           </p>
         </div>
         <button type="submit" class="form-submit-button reset-password-button">Reset password</button>
         <div class="login-registration">
           <p>
-            Don't have an account? <a href="#" class="registration-link change-form-link" data-linkto="registration">Register</a>
+            Don't have an account? <a href="#" class="registration-link change-form-link"
+              data-linkto="registration">Register</a>
           </p>
         </div>
       </form>

@@ -23,8 +23,8 @@ formPopupButton.addEventListener("click", () => handleFormAppearence());
 formCloseButton.addEventListener("click", () => handleFormAppearence());
 logOutButton.addEventListener("click", () => {
   loggedInNavigation.classList.remove("active");
-      formPopupButton.classList.add("active");
-})
+  formPopupButton.classList.add("active");
+});
 
 const changeFormLinks = formWrapper.querySelectorAll(".change-form-link");
 
@@ -57,7 +57,7 @@ inputList.forEach((input) => {
 // I'll use local storage for testing validations
 let users = localStorage.getItem("users")
   ? JSON.parse(localStorage.getItem("users"))
-  : [{ email: "admin@gmail.com", password: "Admin!123", isRemembered: false }];
+  : [{ email: "admin@gmail.com", password: "Admin!123", isRemembered: false, hasAcceptedTerms: true }];
 localStorage.setItem("users", JSON.stringify(users));
 users = JSON.parse(localStorage.getItem("users"));
 console.log(users);
@@ -71,22 +71,9 @@ const loginEmailErrorMessage = loginForm.querySelector(".form-error-email span")
 const loginGeneralErrorMessage = loginForm.querySelector(".form-error-general span");
 
 const emailRegex = new RegExp(/^(\D)+(\w)*((\.(\w)+)?)+@(\D)+(\w)*((\.(\D)+(\w)*)+)?(\.)[a-z]{2,}$/);
-
 const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
 
 function handleLoginValidation() {
-  if (!loginEmail.value) {
-    loginSubmitButton.setAttribute("disabled", true);
-    loginEmailErrorMessage.textContent = "Please, enter your Email";
-    loginEmailErrorMessage.parentElement.classList.add("active");
-  } else loginEmailErrorMessage.parentElement.classList.remove("active");
-
-  if (!loginPassword.value) {
-    loginSubmitButton.setAttribute("disabled", true);
-    loginGeneralErrorMessage.textContent = "Please, enter your Password";
-    loginGeneralErrorMessage.parentElement.classList.add("active");
-  } else loginEmailErrorMessage.parentElement.classList.remove("active");
-
   function isLoginValid() {
     if (!loginEmail.value) {
       loginEmailErrorMessage.textContent = "Please, enter your email";
@@ -127,15 +114,15 @@ function handleLoginValidation() {
   loginEmail.onfocus = () => loginEmailErrorMessage.parentElement.classList.remove("active");
   loginPassword.onfocus = () => loginGeneralErrorMessage.parentElement.classList.remove("active");
 
-  loginEmail.addEventListener("input", () => {
+  loginEmail.oninput = () => {
     isLoginValid();
     buttonAvailable();
-  });
+  };
 
-  loginPassword.addEventListener("input", () => {
+  loginPassword.oninput = () => {
     isPasswordValid();
     buttonAvailable();
-  });
+  };
 }
 
 function loginAccountMatch() {
@@ -151,6 +138,7 @@ function loginAccountMatch() {
         localStorage.setItem("users", JSON.stringify(users));
       }
       formCloseButton.click();
+      loginForm.reset();
     } else if (loginEmail.value === user.email) {
       loginGeneralErrorMessage.textContent = "Email and password doesn't match";
       loginGeneralErrorMessage.parentElement.classList.add("active");
@@ -167,7 +155,159 @@ function loginAccountMatch() {
 loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
   handleLoginValidation();
+
   if (loginSubmitButton.disabled === false) {
     loginAccountMatch();
+  }
+});
+
+const registrationEmail = registrationForm.email;
+const registrationPassword = registrationForm.password;
+const registrationRepeatPassword = registrationForm.repeatPassword;
+const registrationTermsAgreed = registrationForm.registrationTerms;
+
+const registrationSubmitButton = registrationForm.submitButton;
+
+const registrationEmailErrorMessage = registrationForm.querySelector(".form-error-email span");
+const registrationPasswordErrorMessage = registrationForm.querySelector(".form-error-password span");
+const registrationGeneralErrorMessage = registrationForm.querySelector(".form-error-general span");
+
+registrationPasswordErrorMessage.parentElement.style.color = "#ffd75d";
+
+function handleRegistrationValidation() {
+  function isEmailValid() {
+    if (!registrationEmail.value) {
+      registrationSubmitButton.setAttribute("disabled", true);
+      registrationEmailErrorMessage.textContent = "Please, enter your Email";
+      registrationEmailErrorMessage.parentElement.classList.add("active");
+    } else if (!emailRegex.test(registrationEmail.value)) {
+      registrationSubmitButton.setAttribute("disabled", true);
+      registrationEmailErrorMessage.textContent = "It doesn't look like real email";
+      registrationEmailErrorMessage.parentElement.classList.add("active");
+    } else {
+      registrationEmailErrorMessage.parentElement.classList.remove("active");
+      return true;
+    }
+  }
+  isEmailValid();
+
+  function isPasswordValid() {
+    if (!registrationPassword.value) {
+      registrationSubmitButton.setAttribute("disabled", true);
+      registrationPasswordErrorMessage.textContent = "Please, create your Password";
+      registrationPasswordErrorMessage.parentElement.classList.remove("two-lines");
+      registrationPasswordErrorMessage.parentElement.querySelector("i").classList.remove("fa-circle-info");
+      registrationPasswordErrorMessage.parentElement.querySelector("i").classList.add("fa-circle-exclamation");
+      registrationPasswordErrorMessage.parentElement.style.color = "rgb(255, 131, 131)";
+      registrationPasswordErrorMessage.parentElement.classList.add("active");
+    } else if (!passwordRegex.test(registrationPassword.value)) {
+      registrationSubmitButton.setAttribute("disabled", true);
+      registrationPasswordErrorMessage.innerHTML =
+        "Must be 8+ digits and include:<br />Capital letter, a Number, a Special character";
+      registrationPasswordErrorMessage.parentElement.classList.add("two-lines");
+      registrationPasswordErrorMessage.parentElement.querySelector("i").classList.add("fa-circle-info");
+      registrationPasswordErrorMessage.parentElement.querySelector("i").classList.remove("fa-circle-exclamation");
+      registrationPasswordErrorMessage.parentElement.style.color = "rgb(255, 131, 131)";
+      registrationPasswordErrorMessage.parentElement.classList.add("active");
+    } else {
+      registrationPasswordErrorMessage.parentElement.classList.remove("active");
+      return true;
+    }
+  }
+  isPasswordValid();
+
+  function arePasswordsMatch() {
+    if (!registrationRepeatPassword.value) {
+      registrationSubmitButton.setAttribute("disabled", true);
+      registrationGeneralErrorMessage.textContent = "Please, repeat your new Password";
+      registrationGeneralErrorMessage.parentElement.classList.add("active");
+    } else if (registrationRepeatPassword.value !== registrationPassword.value) {
+      registrationSubmitButton.setAttribute("disabled", true);
+      registrationGeneralErrorMessage.textContent = "Your passwords doesn't match";
+      registrationGeneralErrorMessage.parentElement.classList.add("active");
+    } else {
+      registrationGeneralErrorMessage.parentElement.classList.remove("active");
+      return true;
+    }
+  }
+  arePasswordsMatch();
+
+  function buttonAvailable() {
+    if (
+      passwordRegex.test(registrationPassword.value) &&
+      emailRegex.test(registrationEmail.value) &&
+      registrationRepeatPassword.value === registrationPassword.value
+    )
+      registrationSubmitButton.removeAttribute("disabled");
+  }
+
+  registrationEmail.oninput = () => {
+    isEmailValid();
+    buttonAvailable();
+  };
+
+  registrationPassword.oninput = () => {
+    isPasswordValid();
+    arePasswordsMatch();
+    buttonAvailable();
+  };
+
+  registrationRepeatPassword.oninput = () => {
+    arePasswordsMatch();
+    buttonAvailable();
+  };
+}
+
+function isAgreedTurms() {
+  if (!registrationTermsAgreed.checked) {
+    registrationSubmitButton.setAttribute("disabled", true);
+    registrationGeneralErrorMessage.textContent = "Please, agree to our Terms and Conditions";
+    registrationGeneralErrorMessage.parentElement.classList.add("active");
+  } else {
+    registrationGeneralErrorMessage.parentElement.classList.remove("active");
+    return true;
+  }
+}
+
+function handleRegistrationSubmit() {
+  let isUser = !!users.find((user) => user.email === registrationEmail.value);
+  if (!isUser && registrationTermsAgreed.checked) {
+    users.push({
+      email: registrationEmail.value,
+      password: registrationPassword.value,
+      isRemembered: false,
+      hasAcceptedTerms: true,
+    });
+    localStorage.setItem("users", JSON.stringify(users));
+    loggedInNavigation.classList.add("active");
+    formPopupButton.classList.remove("active");
+    formCloseButton.click();
+    registrationForm.reset();
+  } else if (isUser) {
+    registrationEmailErrorMessage.textContent = "This email is already used";
+    registrationEmailErrorMessage.parentElement.classList.add("active");
+    registrationSubmitButton.setAttribute("disabled", true);
+  } else {
+    registrationSubmitButton.setAttribute("disabled", true);
+    registrationGeneralErrorMessage.textContent = "Please, agree to our Terms and Conditions";
+    registrationGeneralErrorMessage.parentElement.classList.add("active");
+    registrationTermsAgreed.oninput = () => {
+      if (!registrationTermsAgreed.checked) {
+        registrationSubmitButton.setAttribute("disabled", true);
+        registrationGeneralErrorMessage.textContent = "Please, agree to our Terms and Conditions";
+        registrationGeneralErrorMessage.parentElement.classList.add("active");
+      } else {
+        registrationGeneralErrorMessage.parentElement.classList.remove("active");
+        registrationSubmitButton.disabled = false;
+      }
+    };
+  }
+}
+
+registrationForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  handleRegistrationValidation();
+  if (registrationSubmitButton.disabled === false) {
+    handleRegistrationSubmit();
   }
 });
