@@ -311,3 +311,49 @@ registrationForm.addEventListener("submit", (event) => {
     handleRegistrationSubmit();
   }
 });
+
+const resetPasswordEmail = resetPasswordForm.email;
+const resetPasswordErrorMessage = resetPasswordForm.querySelector(".form-error-message");
+const resetPasswordMessage = resetPasswordForm.querySelector(".reset-password-message");
+const resetPasswordSubmitButton = resetPasswordForm.submitButton;
+
+function resetPasswordValidaion() {
+  function isEmailValid() {
+    if (!resetPasswordEmail.value) {
+      resetPasswordSubmitButton.setAttribute("disabled", true);
+      resetPasswordErrorMessage.textContent = "Please, enter your Email";
+      resetPasswordErrorMessage.parentElement.classList.add("active");
+    } else if (!emailRegex.test(resetPasswordEmail.value)) {
+      resetPasswordSubmitButton.setAttribute("disabled", true);
+      resetPasswordErrorMessage.textContent = "It doesn't look like real email";
+      resetPasswordErrorMessage.parentElement.classList.add("active");
+    } else {
+      resetPasswordSubmitButton.disabled = false;
+      resetPasswordErrorMessage.parentElement.classList.remove("active");
+      return true;
+    }
+  }
+  isEmailValid();
+}
+
+function handleResetPasswordSubmit() {
+  let isUser = !!users.find((user) => user.email === resetPasswordEmail.value);
+  if (isUser) {
+    resetPasswordMessage.classList.add("active");
+    resetPasswordForm.reeset();
+  } else if (!isUser) {
+    resetPasswordSubmitButton.setAttribute("disabled", true);
+    resetPasswordErrorMessage.textContent = "There is no account with such email";
+    resetPasswordErrorMessage.parentElement.classList.add("active");
+    resetPasswordEmail.oninput = () => resetPasswordValidaion();
+  }
+}
+
+resetPasswordForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  resetPasswordValidaion();
+  resetPasswordEmail.oninput = () => resetPasswordValidaion();
+  if (resetPasswordSubmitButton.disabled === false) {
+    handleResetPasswordSubmit();
+  }
+});

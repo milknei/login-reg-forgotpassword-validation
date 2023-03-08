@@ -377,6 +377,19 @@ header {
     bottom: 8px;
   }
 
+  .form-box .reset-password-message {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: .3s;
+    color: #ffd75d;
+    visibility: hidden;
+  }
+
+  .form-box .reset-password-message.active {
+    transform: scale(1);
+    visibility: visible;
+  }
+
   @media only screen and (max-width: 850px) {
   .navigation {
       display: none;
